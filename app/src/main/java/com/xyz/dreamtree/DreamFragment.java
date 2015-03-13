@@ -5,6 +5,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.TextSwitcher;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,12 +24,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+
+import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 
 /**
  * Created by naman on 13/03/15.
  */
 public class DreamFragment extends Fragment {
 
+    private FeatureCoverFlow mCoverFlow;
+    private CoverFlowAdapter mAdapter;
+    private ArrayList<DreamEntity> mData = new ArrayList<>(0);
+    private TextSwitcher mTitle;
 
     public String loadDreamsFromFile() {
 
@@ -78,7 +92,50 @@ public class DreamFragment extends Fragment {
 
         final View v = inflater.inflate(R.layout.fragment_dream, container, false);
 
+        mData.add(new DreamEntity(R.drawable.image_1, R.string.title_activity_check));
+        mData.add(new DreamEntity(R.drawable.image_2, R.string.title_activity_check));
+        mData.add(new DreamEntity(R.drawable.image_3, R.string.title_activity_check));
+        mData.add(new DreamEntity(R.drawable.image_4, R.string.title_activity_check));
 
+        mTitle = (TextSwitcher) v.findViewById(R.id.title);
+        mTitle.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
+                TextView textView = (TextView) inflater.inflate(R.layout.item_title, null);
+                return textView;
+            }
+        });
+        Animation in = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_top);
+        Animation out = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_bottom);
+        mTitle.setInAnimation(in);
+        mTitle.setOutAnimation(out);
+
+        mAdapter = new CoverFlowAdapter(getActivity());
+        mAdapter.setData(mData);
+        mCoverFlow = (FeatureCoverFlow) v.findViewById(R.id.coverflow);
+        mCoverFlow.setAdapter(mAdapter);
+
+        mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(),
+                        getResources().getString(mData.get(position).titleResId),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
+            @Override
+            public void onScrolledToPosition(int position) {
+                mTitle.setText(getResources().getString(mData.get(position).titleResId));
+            }
+
+            @Override
+            public void onScrolling() {
+                mTitle.setText("");
+            }
+        });
 
 
         final File cacheFile = new File(getActivity().getFilesDir(), "dreams.json");
