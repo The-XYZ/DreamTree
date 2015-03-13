@@ -1,5 +1,6 @@
 package com.xyz.dreamtree;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -77,8 +78,6 @@ public class DreamFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         final View v = inflater.inflate(R.layout.fragment_dream, container, false);
-
-
 
 
         final File cacheFile = new File(getActivity().getFilesDir(), "dreams.json");
