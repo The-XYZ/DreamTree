@@ -24,7 +24,6 @@ import java.io.InputStream;
 public class DreamFragment extends Fragment {
 
 
-
     public String loadDreamsFromFile() {
 
         String jsonString = "";
@@ -80,6 +79,8 @@ public class DreamFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_dream, container, false);
 
 
+
+
         final File cacheFile = new File(getActivity().getFilesDir(), "dreams.json");
 
         if (cacheFile.exists()) {
@@ -102,13 +103,15 @@ public class DreamFragment extends Fragment {
     private void parseDreams() {
         try {
             JSONObject response = new JSONObject(loadDreamsFromFile());
-            JSONArray feedArray = response.getJSONArray("data");
+            JSONArray dreams = response.getJSONArray("dreams");
 
-            for (int i = 0; i < feedArray.length(); i++) {
+            JSONObject object =dreams.getJSONObject(0);
+
+
+
+            for (int i = 0; i < dreams.length(); i++) {
 
             }
-
-
 
         } catch (JSONException e) {
             e.printStackTrace();

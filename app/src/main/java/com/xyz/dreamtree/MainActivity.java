@@ -66,8 +66,6 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-
-
         navMenuIcons.recycle();
 
 
