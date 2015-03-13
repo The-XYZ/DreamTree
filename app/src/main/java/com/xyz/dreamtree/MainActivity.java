@@ -1,5 +1,7 @@
 package com.xyz.dreamtree;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -20,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends ActionBarActivity {
 	private DrawerLayout mDrawerLayout;
@@ -106,8 +109,10 @@ public class MainActivity extends ActionBarActivity {
             displayView(0);
         }
 
-        Intent intent = new Intent(getApplicationContext(), NotifyService.class);
-        getApplicationContext().startService(intent);
+//        Intent intent = new Intent(getApplicationContext(), NotifyService.class);
+//        getApplicationContext().startService(intent);
+
+
 
     }
 
