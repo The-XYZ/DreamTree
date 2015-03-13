@@ -170,7 +170,7 @@ public class MainActivity extends ActionBarActivity {
                 fragment = new DreamFragment();
                 break;
             case 1:
-
+                fragment = new DayFragment();
                 break;
             case 2:
 
