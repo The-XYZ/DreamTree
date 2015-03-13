@@ -5,4 +5,24 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string-array name="nav_drawer_items">
+
+        <item >Dreams</item>
+        <item >DOnt KNow</item>
+        <item >Dont Know</item>
+
+
+
+    </string-array>
+
+
+    <array name="nav_drawer_icons">
+        <item></item>
+        <item></item>
+        <item></item>
+
+
+
+    </array>
+
 </resources>
