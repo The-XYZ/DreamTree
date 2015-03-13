@@ -9,10 +9,13 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +41,8 @@ public class DreamFragment extends Fragment {
     private CoverFlowAdapter mAdapter;
     private ArrayList<DreamEntity> mData = new ArrayList<>(0);
     private TextSwitcher mTitle;
+
+    FloatingActionButton createDream;
 
     public String loadDreamsFromFile() {
 
@@ -92,6 +97,17 @@ public class DreamFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         final View v = inflater.inflate(R.layout.fragment_dream, container, false);
+
+
+        createDream =(FloatingActionButton)v.findViewById(R.id.fab);
+        createDream.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), NotifyService.class);
+                getActivity().startService(intent);
+            }
+        });
 
         mData.add(new DreamEntity(R.drawable.image_1, R.string.title_activity_check));
         mData.add(new DreamEntity(R.drawable.image_2, R.string.title_activity_check));
