@@ -55,6 +55,7 @@ public class DreamFragment extends Fragment {
             while ((currentLine = br.readLine()) != null) {
                 jsonString += currentLine + '\n';
             }
+
             br.close();
 
         } catch (IOException e) {
@@ -184,6 +185,11 @@ public class DreamFragment extends Fragment {
 
 
             for (int i = 0; i < dreams.length(); i++) {
+
+                String time = dreams.getJSONObject(i).getString("time");
+                String date = dreams.getJSONObject(i).getString("date");
+                String data = dreams.getJSONObject(i).getString("data");
+                String uri = dreams.getJSONObject(i).getString("uri");
 
             }
 

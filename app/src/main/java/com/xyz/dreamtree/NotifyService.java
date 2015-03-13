@@ -54,7 +54,7 @@ public class NotifyService extends Service {
         
         Notification notification = new Notification.Builder(this)
         .setContentTitle(notificationTitle)
-        .setContentText(notificationText).setSmallIcon(R.drawable.ic_back)
+        .setContentText(notificationText).setSmallIcon(R.mipmap.ic_launcher)
         .setContentIntent(pendingIntent).setAutoCancel(true).build();
         NotificationManager notificationManager =
                   (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
