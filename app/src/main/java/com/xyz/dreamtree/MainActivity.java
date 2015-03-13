@@ -1,5 +1,6 @@
 package com.xyz.dreamtree;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
 
 
         mTitle = mDrawerTitle = getTitle();
@@ -103,6 +105,10 @@ public class MainActivity extends ActionBarActivity {
 
             displayView(0);
         }
+
+        Intent intent = new Intent(getApplicationContext(), NotifyService.class);
+        getApplicationContext().startService(intent);
+
     }
 
 
