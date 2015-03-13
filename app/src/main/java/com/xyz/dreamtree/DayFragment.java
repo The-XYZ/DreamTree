@@ -1,7 +1,10 @@
 package com.xyz.dreamtree;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,6 +94,9 @@ public class DayFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         final View v = inflater.inflate(R.layout.fragment_memories, container, false);
+
+        ActionBarActivity activity = (ActionBarActivity) getActivity();
+        activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#8BC34A")));
 
         mData.add(new DreamEntity(R.drawable.image_1, R.string.title_activity_check));
         mData.add(new DreamEntity(R.drawable.image_2, R.string.title_activity_check));

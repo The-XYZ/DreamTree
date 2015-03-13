@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:coverflow="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#8BC34A">
 
     <it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow
         android:id="@+id/coverflow"
@@ -36,7 +37,7 @@
         fab:fab_plusIconColor="@color/white"
         fab:fab_colorNormal="@color/blue_semi_transparent"
         fab:fab_colorPressed="@color/blue_semi_transparent_pressed"
-        android:layout_marginBottom="26dp"
-        android:paddingBottom="26dp"/>
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"/>
 
-</RelativeLayout>
+</FrameLayout>
