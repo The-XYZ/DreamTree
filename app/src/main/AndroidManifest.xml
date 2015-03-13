@@ -18,7 +18,8 @@
         </activity>
 
         <service android:name=".NotifyService"/>
-
+        <activity android:name=".AddDream"
+            android:theme="@style/AppThemeNoToolbar"/>
     </application>
 
 </manifest>
