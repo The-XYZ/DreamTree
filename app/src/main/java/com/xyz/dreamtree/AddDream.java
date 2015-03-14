@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapEditText;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +44,7 @@ import java.util.Locale;
 public class AddDream extends ActionBarActivity {
 
 
+
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -52,8 +56,8 @@ public class AddDream extends ActionBarActivity {
 
 
 
-    private EditText edit;
-    private Button save,takePic;
+    private BootstrapEditText edit;
+    private BootstrapButton save,takePic;
     private String jsonSting;
     private ImageView camera;
     private static final int CAMERA_REQUEST = 1888;
@@ -84,11 +88,13 @@ public class AddDream extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.dream_add);
-        edit=(EditText) findViewById(R.id.edit);
-        save=(Button) findViewById(R.id.save);
-        takePic=(Button) findViewById(R.id.takepic);
+        setContentView(R.layout.home);
+        edit=(BootstrapEditText) findViewById(R.id.edit);
+        save=(BootstrapButton) findViewById(R.id.save);
+        takePic=(BootstrapButton) findViewById(R.id.takepic);
         camera=(ImageView) findViewById(R.id.camera);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,11 +185,13 @@ public class AddDream extends ActionBarActivity {
 
         int hour = cal.get(Calendar.HOUR);
         int dayofmonth = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH);
+        int year =cal.get(Calendar.YEAR);
 
         JSONObject dream = new JSONObject();
         try {
             dream.put("time", hour+":"+minute);
-            dream.put("date", dayofmonth);
+            dream.put("date", dayofmonth+"-"+month+"-"+year);
             dream.put("data", edit.getText());
             dream.put("mood", "Arts");
             dream.put("uri", fileUri.toString());

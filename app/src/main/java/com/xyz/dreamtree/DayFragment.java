@@ -13,13 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,15 +105,15 @@ public class DayFragment extends Fragment {
 //        mData.add(new DreamEntity(R.drawable.image_3, R.string.title_activity_check));
 //        mData.add(new DreamEntity(R.drawable.image_4, R.string.title_activity_check));
 
-        mTitle = (TextSwitcher) v.findViewById(R.id.title);
-        mTitle.setFactory(new ViewSwitcher.ViewFactory() {
-            @Override
-            public View makeView() {
-                LayoutInflater inflater = LayoutInflater.from(getActivity());
-                TextView textView = (TextView) inflater.inflate(R.layout.item_title, null);
-                return textView;
-            }
-        });
+        //mTitle = (TextSwitcher) v.findViewById(R.id.title);
+//        mTitle.setFactory(new ViewSwitcher.ViewFactory() {
+//            @Override
+//            public View makeView() {
+//                LayoutInflater inflater = LayoutInflater.from(getActivity());
+//                TextView textView = (TextView) inflater.inflate(R.layout.item_title, null);
+//                return textView;
+//            }
+//        });
         Animation in = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_top);
         Animation out = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_bottom);
         mTitle.setInAnimation(in);
