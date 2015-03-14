@@ -14,7 +14,7 @@
         android:orientation="horizontal" >
 
         <FrameLayout
-            android:id="@+id/apps"
+            android:id="@+id/happy"
             android:layout_width="100dp"
             android:layout_height="180dp"
             android:contentDescription="@string/app_name"
@@ -45,7 +45,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/contacts"
+            android:id="@+id/angry"
             android:layout_width="100dp"
             android:layout_weight="1"
             android:layout_height="180dp"
@@ -87,7 +87,7 @@
         android:orientation="horizontal" >
 
         <FrameLayout
-            android:id="@+id/artists"
+            android:id="@+id/excited"
             android:layout_width="100dp"
             android:layout_height="180dp"
             android:contentDescription="@string/app_name"
@@ -119,7 +119,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/bookmarks"
+            android:id="@+id/sad"
             android:layout_width="100dp"
             android:layout_weight="1"
             android:layout_margin="10dp"

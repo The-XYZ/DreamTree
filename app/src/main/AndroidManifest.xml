@@ -38,6 +38,9 @@
         <activity android:name=".DetailMemory"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppThemeNoToolbar"/>
+        <activity android:name=".MoodActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppThemeNoToolbar"/>
     </application>
 
 </manifest>
