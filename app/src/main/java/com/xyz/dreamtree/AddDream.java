@@ -103,11 +103,13 @@ public class AddDream extends ActionBarActivity {
 
         int hour = cal.get(Calendar.HOUR);
         int dayofmonth = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH);
+        int year =cal.get(Calendar.YEAR);
 
         JSONObject dream = new JSONObject();
         try {
             dream.put("time", hour+":"+minute);
-            dream.put("date", dayofmonth);
+            dream.put("date", dayofmonth+"-"+month+"-"+year);
             dream.put("data", edit.getText());
             dream.put("mood", "Arts");
             dream.put("uri", byteArray);
