@@ -41,6 +41,7 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 /**
  * Created by naman on 14/03/15.
  */
+
 public class DayFragment extends Fragment {
 
     private FeatureCoverFlow mCoverFlow2;
