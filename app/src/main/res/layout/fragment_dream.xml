@@ -21,6 +21,7 @@
         coverflow:spacing="0.6"
         android:layout_gravity="top"/>
 
+    <!--
     <TextSwitcher
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -28,6 +29,7 @@
         android:paddingBottom="16dp"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true" />
+    -->
 
     <com.getbase.floatingactionbutton.AddFloatingActionButton
         android:id="@+id/fab"

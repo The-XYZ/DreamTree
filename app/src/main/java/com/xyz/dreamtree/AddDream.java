@@ -71,6 +71,9 @@ public class AddDream extends ActionBarActivity {
             public void onClick(View v) {
 
                 writeJSON();
+                finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
         takePic.setOnClickListener(new View.OnClickListener() {
