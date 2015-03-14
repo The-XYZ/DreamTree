@@ -1,6 +1,7 @@
 package com.xyz.dreamtree;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -19,6 +20,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.Calendar;
 
 /**
@@ -30,7 +32,8 @@ public class AddDream extends ActionBarActivity {
     private Button save,takePic;
     private String jsonSting;
     private ImageView camera;
-
+    private static final int CAMERA_REQUEST = 1888;
+    private String byteArray;
     public String loadDreamsFromFile() {
 
         String jsonString = "";
@@ -74,10 +77,23 @@ public class AddDream extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }
         });
 
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            camera.setImageBitmap(photo);
+            int bytes = photo.getByteCount();
+            ByteBuffer buffer = ByteBuffer.allocate(bytes); //Create a new buffer
+            photo.copyPixelsToBuffer(buffer);
+            byte[] array = buffer.array();
+            byteArray=array.toString();
+
+        }
     }
 
     public void writeJSON() {
@@ -94,7 +110,7 @@ public class AddDream extends ActionBarActivity {
             dream.put("date", dayofmonth);
             dream.put("data", edit.getText());
             dream.put("mood", "Arts");
-            dream.put("uri", "5/5/1993");
+            dream.put("uri", byteArray);
 
         } catch (JSONException e) {
 
