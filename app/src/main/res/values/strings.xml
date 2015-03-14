@@ -6,27 +6,21 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="nav_drawer_items">
-
-        <item >Dreams</item>
-        <item >Memories</item>
-        <item >Moody baba</item>
-
-
-
+        <item>Dreams</item>
+        <item>Memories</item>
+        <item>Moody baba</item>
     </string-array>
 
-
     <array name="nav_drawer_icons">
-        <item></item>
-        <item></item>
-        <item></item>
-
-
-
+        <item/>
+        <item/>
+        <item/>
     </array>
+
     <string name="title_activity_check">check</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
 
 </resources>
