@@ -1,22 +1,30 @@
 package com.xyz.dreamtree;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,10 +46,20 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
  */
 public class DayFragment extends Fragment {
 
-    private FeatureCoverFlow mCoverFlow;
-    private CoverFlowAdapter mAdapter;
-    private ArrayList<DreamEntity> mData = new ArrayList<>(0);
+    private FeatureCoverFlow mCoverFlow2;
+    private CoverFlowAdapter2 mAdapter2;
+    private ArrayList<DayEntity> mData2 = new ArrayList<>(0);
+
     private TextSwitcher mTitle;
+
+    ArrayList<String> timeList = new ArrayList<String>();
+    ArrayList<String> dataList = new ArrayList<String>();
+    ArrayList<String> dateList = new ArrayList<String>();
+    ArrayList<String> uriList = new ArrayList<String>();
+    ArrayList<String> moodList = new ArrayList<String>();
+
+
+    FloatingActionButton createDream;
 
     public String loadDreamsFromFile() {
 
@@ -54,6 +72,7 @@ public class DayFragment extends Fragment {
             while ((currentLine = br.readLine()) != null) {
                 jsonString += currentLine + '\n';
             }
+
             br.close();
 
         } catch (IOException e) {
@@ -97,53 +116,10 @@ public class DayFragment extends Fragment {
 
         final View v = inflater.inflate(R.layout.fragment_memories, container, false);
 
-        ActionBarActivity activity = (ActionBarActivity) getActivity();
-        activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#8BC34A")));
-
-//        mData.add(new DreamEntity(R.drawable.image_1, R.string.title_activity_check));
-//        mData.add(new DreamEntity(R.drawable.image_2, R.string.title_activity_check));
-//        mData.add(new DreamEntity(R.drawable.image_3, R.string.title_activity_check));
-//        mData.add(new DreamEntity(R.drawable.image_4, R.string.title_activity_check));
-
-        //mTitle = (TextSwitcher) v.findViewById(R.id.title);
-//        mTitle.setFactory(new ViewSwitcher.ViewFactory() {
-//            @Override
-//            public View makeView() {
-//                LayoutInflater inflater = LayoutInflater.from(getActivity());
-//                TextView textView = (TextView) inflater.inflate(R.layout.item_title, null);
-//                return textView;
-//            }
-//        });
-        Animation in = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_top);
-        Animation out = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_bottom);
-        mTitle.setInAnimation(in);
-        mTitle.setOutAnimation(out);
-
-        mAdapter = new CoverFlowAdapter(getActivity());
-        mAdapter.setData(mData);
-        mCoverFlow = (FeatureCoverFlow) v.findViewById(R.id.coverflow);
-        mCoverFlow.setAdapter(mAdapter);
-
-//        mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getActivity(),
-//                        getResources().getString(mData.get(position).titleResId),
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
-//            @Override
-//            public void onScrolledToPosition(int position) {
-//                mTitle.setText(getResources().getString(mData.get(position).titleResId));
-//            }
-//
-//            @Override
-//            public void onScrolling() {
-//                mTitle.setText("");
-//            }
-//        });
+        mAdapter2 = new CoverFlowAdapter2(getActivity());
+        mCoverFlow2 = (FeatureCoverFlow) v.findViewById(R.id.coverflow);
+        createDream =(FloatingActionButton)v.findViewById(R.id.fab);
+//        mTitle = (TextSwitcher) v.findViewById(R.id.title);
 
 
 
@@ -162,6 +138,64 @@ public class DayFragment extends Fragment {
 
         }
 
+
+        createDream.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), NotifyService.class);
+                getActivity().startService(intent);
+
+                Intent startAddDream = new Intent(getActivity(), Addmemory.class);
+                startActivity(startAddDream);
+            }
+        });
+
+
+
+        mCoverFlow2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(),
+                        (mData2.get(position).data),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mCoverFlow2.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
+            @Override
+            public void onScrolledToPosition(int position) {
+//                mTitle.setText((mData2.get(position).data));
+            }
+
+            @Override
+            public void onScrolling() {
+//                mTitle.setText("");
+            }
+        });
+
+
+
+
+//        mTitle.setFactory(new ViewSwitcher.ViewFactory() {
+//            @Override
+//            public View makeView() {
+//                LayoutInflater inflater = LayoutInflater.from(getActivity());
+//                TextView textView = (TextView) inflater.inflate(R.layout.item_title, null);
+//                return textView;
+//            }
+//        });
+
+
+//        Animation in = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_top);
+//        Animation out = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_bottom);
+//        mTitle.setInAnimation(in);
+//        mTitle.setOutAnimation(out);
+
+
+
+
+
         return v;
 
     }
@@ -169,19 +203,38 @@ public class DayFragment extends Fragment {
     private void parseDreams() {
         try {
             JSONObject response = new JSONObject(loadDreamsFromFile());
-            JSONArray memories = response.getJSONArray("memories");
-
-            JSONObject object =memories.getJSONObject(0);
+            JSONArray dreams = response.getJSONArray("memories");
 
 
+            Log.d("dssd", response.toString());
+//            JSONObject object =dreams.getJSONObject(0);
 
-            for (int i = 0; i < memories.length(); i++) {
+
+
+            for (int i = 0; i < dreams.length(); i++) {
+
+                String time = (dreams.getJSONObject(i).getString("time"));
+                String data = (dreams.getJSONObject(i).getString("data"));
+                String date = (dreams.getJSONObject(i).getString("date"));
+                String uri =(dreams.getJSONObject(i).getString("uri"));
+
+                String mood = (dreams.getJSONObject(i).getString("mood"));
+
+
+                mData2.add(new DayEntity(uri, date, data, mood, time ));
+
 
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+        mAdapter2.setData(mData2);
+        mCoverFlow2.setAdapter(mAdapter2);
+
+
     }
     private void createJsonForFisrtTime() {
         File cacheFile = new File(getActivity().getFilesDir(), "memories.json");
@@ -218,27 +271,29 @@ public class DayFragment extends Fragment {
 
 
 
-    public class CoverFlowAdapter extends BaseAdapter {
 
-        private ArrayList<DreamEntity> mData = new ArrayList<>(0);
+
+    public class CoverFlowAdapter2 extends BaseAdapter {
+
+        private ArrayList<DayEntity> mData2 = new ArrayList<>(0);
         private Context mContext;
 
-        public CoverFlowAdapter(Context context) {
+        public CoverFlowAdapter2(Context context) {
             mContext = context;
         }
 
-        public void setData(ArrayList<DreamEntity> data) {
-            mData = data;
+        public void setData(ArrayList<DayEntity> data) {
+            mData2 = data;
         }
 
         @Override
         public int getCount() {
-            return mData.size();
+            return mData2.size();
         }
 
         @Override
         public Object getItem(int pos) {
-            return mData.get(pos);
+            return mData2.get(pos);
         }
 
         @Override
@@ -253,7 +308,7 @@ public class DayFragment extends Fragment {
 
             if (rowView == null) {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowView = inflater.inflate(R.layout.item_coverflow, null);
+                rowView = inflater.inflate(R.layout.item_coverflow2, null);
 
                 ViewHolder viewHolder = new ViewHolder();
                 viewHolder.data = (TextView) rowView.findViewById(R.id.data);
@@ -266,13 +321,24 @@ public class DayFragment extends Fragment {
                 rowView.setTag(viewHolder);
             }
 
+
+
             ViewHolder holder = (ViewHolder) rowView.getTag();
 
-            holder.image.setImageBitmap(BitmapFactory.decodeByteArray(Base64.decode(mData.get(position).imageResId, Base64.DEFAULT), 0, Base64.decode(mData.get(position).imageResId, Base64.DEFAULT).length));
-            holder.date.setText(mData.get(position).date);
-            holder.time.setText(mData.get(position).time);
-            holder.mood.setText(mData.get(position).mood);
-            holder.data.setText(mData.get(position).data);
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            // downsizing image as it throws OutOfMemory Exception for larger
+            // images
+            options.inSampleSize = 8;
+            final Bitmap bitmap = BitmapFactory.decodeFile(Uri.parse(mData2.get(position).imageResId).getPath(),
+                    options);
+
+            holder.image.setImageBitmap(bitmap);
+
+            holder.date.setText(mData2.get(position).date);
+            holder.time.setText(mData2.get(position).time);
+//        holder.mood.setText(mData2.get(position).mood);
+            holder.data.setText(mData2.get(position).data);
 
 
             return rowView;
@@ -287,6 +353,5 @@ public class DayFragment extends Fragment {
             public TextView data;
         }
     }
-
 
 }
