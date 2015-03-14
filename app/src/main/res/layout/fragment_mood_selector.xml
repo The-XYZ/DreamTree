@@ -1,9 +1,157 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.xyz.dreamtree.MoodSelector">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#eeeeee"
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" >
+
+        <FrameLayout
+            android:id="@+id/apps"
+            android:layout_width="100dp"
+            android:layout_height="180dp"
+            android:contentDescription="@string/app_name"
+            android:background="#7e57c2"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:id="@+id/appsi"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_happy"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:textColor="#ffffff"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:layout_gravity="bottom|center"
+                android:text="Happy"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/contacts"
+            android:layout_width="100dp"
+            android:layout_weight="1"
+            android:layout_height="180dp"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/app_name"
+            android:background="#259b24"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/contactsi"
+                android:src="@drawable/ic_angry"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:textColor="#ffffff"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:layout_gravity="bottom|center"
+                android:text="Angry"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal" >
+
+        <FrameLayout
+            android:id="@+id/artists"
+            android:layout_width="100dp"
+            android:layout_height="180dp"
+            android:contentDescription="@string/app_name"
+            android:background="#039be5"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/artistsi"
+
+                android:src="@drawable/ic_excited"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:textColor="#ffffff"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:layout_gravity="bottom|center"
+                android:text="Excited"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/bookmarks"
+            android:layout_width="100dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_height="180dp"
+            android:contentDescription="@string/app_name"
+            android:background="#ef6c00"
+            android:layout_gravity="left"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:id="@+id/bookmarksi"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_sad"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_gravity="bottom|center"
+                android:text="Sad"/>
+        </FrameLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
