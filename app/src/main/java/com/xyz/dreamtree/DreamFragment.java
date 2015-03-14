@@ -2,9 +2,12 @@ package com.xyz.dreamtree;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -211,12 +214,8 @@ public class DreamFragment extends Fragment {
                 String time = (dreams.getJSONObject(i).getString("time"));
                 String data = (dreams.getJSONObject(i).getString("data"));
                 String date = (dreams.getJSONObject(i).getString("date"));
-                byte[] uri = new byte[0];
-                try {
-                    uri = (dreams.getJSONObject(i).getString("uri")).getBytes("UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                String uri =(dreams.getJSONObject(i).getString("uri"));
+
                 String mood = (dreams.getJSONObject(i).getString("mood"));
 
 
@@ -320,10 +319,21 @@ public class DreamFragment extends Fragment {
             rowView.setTag(viewHolder);
         }
 
+
+
         ViewHolder holder = (ViewHolder) rowView.getTag();
 
-        holder.image.setImageBitmap(BitmapFactory.decodeByteArray(mData.get(position).imageResId, 0, mData.get(position).imageResId.length));
-        holder.date.setText(mData.get(position).date);
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            // downsizing image as it throws OutOfMemory Exception for larger
+            // images
+            options.inSampleSize = 8;
+            final Bitmap bitmap = BitmapFactory.decodeFile(Uri.parse(mData.get(position).imageResId).getPath(),
+                    options);
+
+            holder.image.setImageBitmap(bitmap);
+
+            holder.date.setText(mData.get(position).date);
         holder.time.setText(mData.get(position).time);
 //        holder.mood.setText(mData.get(position).mood);
             holder.data.setText(mData.get(position).data);

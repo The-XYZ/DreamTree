@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -270,7 +271,7 @@ public class DayFragment extends Fragment {
 
             ViewHolder holder = (ViewHolder) rowView.getTag();
 
-            holder.image.setImageBitmap(BitmapFactory.decodeByteArray(mData.get(position).imageResId, 0, mData.get(position).imageResId.length));
+            holder.image.setImageBitmap(BitmapFactory.decodeByteArray(Base64.decode(mData.get(position).imageResId, Base64.DEFAULT), 0, Base64.decode(mData.get(position).imageResId, Base64.DEFAULT).length));
             holder.date.setText(mData.get(position).date);
             holder.time.setText(mData.get(position).time);
             holder.mood.setText(mData.get(position).mood);

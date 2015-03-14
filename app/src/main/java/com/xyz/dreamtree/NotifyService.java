@@ -39,8 +39,8 @@ public class NotifyService extends Service {
         registerReceiver(notifyServiceReceiver, intentFilter);
         
         // Send Notification
-        String notificationTitle = "Demo of Notification!";
-        String notificationText = "Course Website";
+        String notificationTitle = "Wake up !";
+        String notificationText = "Record your dream, before you forget it !";
         Intent myIntent = new Intent(this, MainActivity.class);
         myIntent.putExtra("idopen","true");
 
