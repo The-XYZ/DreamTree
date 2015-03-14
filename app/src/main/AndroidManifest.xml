@@ -30,6 +30,9 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppThemeNoToolbar"/>
         <activity android:name=".DetailDream"
+            android:theme="@style/AppThemeNoToolbar"/>
+
+        <activity android:name=".Addmemory"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppThemeNoToolbar"/>
     </application>

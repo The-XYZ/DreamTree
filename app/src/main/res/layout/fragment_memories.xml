@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:coverflow="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/tools"
+    xmlns:coverflow="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A">
+    android:background="#1976D2">
+
 
     <it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow
         android:id="@+id/coverflow"
@@ -20,6 +21,7 @@
         coverflow:spacing="0.6"
         android:layout_gravity="top"/>
 
+    <!--
     <TextSwitcher
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -27,6 +29,7 @@
         android:paddingBottom="16dp"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true" />
+    -->
 
     <com.getbase.floatingactionbutton.AddFloatingActionButton
         android:id="@+id/fab"
@@ -39,5 +42,6 @@
         fab:fab_colorPressed="@color/blue_semi_transparent_pressed"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"/>
+
 
 </FrameLayout>
