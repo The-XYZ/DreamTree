@@ -19,7 +19,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
@@ -153,9 +152,10 @@ public class DreamFragment extends Fragment {
         mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),
-                       (mData.get(position).data),
-                        Toast.LENGTH_SHORT).show();
+
+                Intent intent =new Intent(getActivity(),DetailDream.class);
+                intent.putExtra("position",position);
+                startActivity(intent);
             }
         });
 
