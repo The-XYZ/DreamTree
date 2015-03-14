@@ -1,6 +1,9 @@
 package com.xyz.dreamtree;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,23 +51,34 @@ public class CoverFlowAdapter extends BaseAdapter {
             rowView = inflater.inflate(R.layout.item_coverflow, null);
 
             ViewHolder viewHolder = new ViewHolder();
-            viewHolder.text = (TextView) rowView.findViewById(R.id.label);
-            viewHolder.image = (ImageView) rowView
-                    .findViewById(R.id.image);
+            viewHolder.data = (TextView) rowView.findViewById(R.id.data);
+            viewHolder.image = (ImageView) rowView.findViewById(R.id.image);
+            viewHolder.date = (TextView) rowView.findViewById(R.id.date);
+            viewHolder.time = (TextView) rowView.findViewById(R.id.time);
+            viewHolder.mood = (TextView) rowView.findViewById(R.id.mood);
+
+
             rowView.setTag(viewHolder);
         }
 
         ViewHolder holder = (ViewHolder) rowView.getTag();
 
-        holder.image.setImageResource(mData.get(position).imageResId);
-        holder.text.setText(mData.get(position).titleResId);
+        holder.image.setImageBitmap(BitmapFactory.decodeByteArray(mData.get(position).imageResId, 0, mData.get(position).imageResId.length));
+        holder.date.setText(mData.get(position).date);
+        holder.time.setText(mData.get(position).time);
+        holder.mood.setText(mData.get(position).mood);
+        holder.data.setText(mData.get(position).data);
 
-		return rowView;
+
+        return rowView;
 	}
 
 
     static class ViewHolder {
-        public TextView text;
+        public TextView date;
         public ImageView image;
+        public TextView time;
+        public TextView mood ;
+        public TextView data;
     }
 }

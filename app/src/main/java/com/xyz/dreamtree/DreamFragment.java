@@ -28,6 +28,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
@@ -41,6 +42,13 @@ public class DreamFragment extends Fragment {
     private CoverFlowAdapter mAdapter;
     private ArrayList<DreamEntity> mData = new ArrayList<>(0);
     private TextSwitcher mTitle;
+
+    ArrayList<String> timeList = new ArrayList<String>();
+    ArrayList<String> dataList = new ArrayList<String>();
+    ArrayList<String> dateList = new ArrayList<String>();
+    ArrayList<String> uriList = new ArrayList<String>();
+    ArrayList<String> moodList = new ArrayList<String>();
+
 
     FloatingActionButton createDream;
 
@@ -100,6 +108,22 @@ public class DreamFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_dream, container, false);
 
 
+        final File cacheFile = new File(getActivity().getFilesDir(), "dreams.json");
+
+        if (cacheFile.exists()) {
+
+            parseDreams();
+
+        }
+        else
+
+        {
+            createJsonForFisrtTime();
+            parseDreams();
+
+        }
+
+
         createDream =(FloatingActionButton)v.findViewById(R.id.fab);
         createDream.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,10 +134,31 @@ public class DreamFragment extends Fragment {
             }
         });
 
-        mData.add(new DreamEntity(R.drawable.image_1, R.string.title_activity_check));
-        mData.add(new DreamEntity(R.drawable.image_2, R.string.title_activity_check));
-        mData.add(new DreamEntity(R.drawable.image_3, R.string.title_activity_check));
-        mData.add(new DreamEntity(R.drawable.image_4, R.string.title_activity_check));
+
+
+        mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(),
+                       (mData.get(position).data),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
+            @Override
+            public void onScrolledToPosition(int position) {
+                mTitle.setText((mData.get(position).data));
+            }
+
+            @Override
+            public void onScrolling() {
+                mTitle.setText("");
+            }
+        });
+
+
+
 
         mTitle = (TextSwitcher) v.findViewById(R.id.title);
         mTitle.setFactory(new ViewSwitcher.ViewFactory() {
@@ -132,44 +177,9 @@ public class DreamFragment extends Fragment {
         mAdapter = new CoverFlowAdapter(getActivity());
         mAdapter.setData(mData);
         mCoverFlow = (FeatureCoverFlow) v.findViewById(R.id.coverflow);
-        mCoverFlow.setAdapter(mAdapter);
-
-        mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),
-                        getResources().getString(mData.get(position).titleResId),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
-            @Override
-            public void onScrolledToPosition(int position) {
-                mTitle.setText(getResources().getString(mData.get(position).titleResId));
-            }
-
-            @Override
-            public void onScrolling() {
-                mTitle.setText("");
-            }
-        });
 
 
-        final File cacheFile = new File(getActivity().getFilesDir(), "dreams.json");
 
-        if (cacheFile.exists()) {
-
-            parseDreams();
-
-        }
-        else
-
-        {
-            createJsonForFisrtTime();
-            parseDreams();
-
-        }
 
         return v;
 
@@ -180,22 +190,38 @@ public class DreamFragment extends Fragment {
             JSONObject response = new JSONObject(loadDreamsFromFile());
             JSONArray dreams = response.getJSONArray("dreams");
 
-            JSONObject object =dreams.getJSONObject(0);
+//            JSONObject object =dreams.getJSONObject(0);
 
 
 
-            for (int i = 0; i < dreams.length(); i++) {
+            for (int i = 1; i < dreams.length(); i++) {
 
-                String time = dreams.getJSONObject(i).getString("time");
-                String date = dreams.getJSONObject(i).getString("date");
-                String data = dreams.getJSONObject(i).getString("data");
-                String uri = dreams.getJSONObject(i).getString("uri");
+                String time = (dreams.getJSONObject(i).getString("time"));
+                String data = (dreams.getJSONObject(i).getString("data"));
+                String date = (dreams.getJSONObject(i).getString("date"));
+                byte[] uri = new byte[0];
+                try {
+                    uri = (dreams.getJSONObject(i).getString("uri")).getBytes("UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                String mood = (dreams.getJSONObject(i).getString("mood"));
+
+
+                mData.add(new DreamEntity(uri, date, data, mood, time ));
+
 
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+
+        mCoverFlow.setAdapter(mAdapter);
+
+
     }
     private void createJsonForFisrtTime() {
         File cacheFile = new File(getActivity().getFilesDir(), "dreams.json");
