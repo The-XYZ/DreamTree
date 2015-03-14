@@ -107,7 +107,7 @@ public class DreamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View v = inflater.inflate(R.layout.fragment_dream, container, false);
+        final View v = inflater.inflate(R.layout.home_dreams, container, false);
 
         mAdapter = new CoverFlowAdapter(getActivity());
         mCoverFlow = (FeatureCoverFlow) v.findViewById(R.id.coverflow);
