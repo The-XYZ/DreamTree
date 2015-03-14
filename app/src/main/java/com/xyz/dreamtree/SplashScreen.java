@@ -14,8 +14,7 @@ public class SplashScreen extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-         mPlayer = MediaPlayer.create(this, R.raw.happy);
-        mPlayer.start();
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
