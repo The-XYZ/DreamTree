@@ -1,5 +1,6 @@
 package com.xyz.dreamtree;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.FrameLayout;
@@ -20,5 +21,28 @@ public class MoodActivity extends ActionBarActivity {
         
         mood=getIntent().getStringExtra("mood");
 
+        if(mood.equals("happy"))
+        {
+            MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.happy);
+            mPlayer.start();
+        }
+
+        if(mood.equals("angry"))
+        {
+            MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.angry);
+            mPlayer.start();
+        }
+
+        if(mood.equals("sad"))
+        {
+            MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.sad);
+            mPlayer.start();
+        }
+
+        if(mood.equals("excited"))
+        {
+            MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.excited);
+            mPlayer.start();
+        }
     }
 }
