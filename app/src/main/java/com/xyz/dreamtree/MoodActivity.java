@@ -13,6 +13,8 @@ public class MoodActivity extends ActionBarActivity {
     private FrameLayout happy,angry,excited,sad;
     private String mood;
 
+    MediaPlayer mPlayer;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +25,7 @@ public class MoodActivity extends ActionBarActivity {
 
         if(mood.equals("happy"))
         {
-            MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.happy);
+            mPlayer = MediaPlayer.create(this, R.raw.happy);
             mPlayer.start();
         }
 
@@ -45,4 +47,12 @@ public class MoodActivity extends ActionBarActivity {
             mPlayer.start();
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPlayer.stop();
+    }
+
+
 }
