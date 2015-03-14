@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +36,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
+
 
 /**
  * Created by naman on 14/03/15.
@@ -107,13 +111,15 @@ public class DayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View v = inflater.inflate(R.layout.fragment_memories, container, false);
+        final View v = inflater.inflate(R.layout.home_memories, container, false);
 
         mAdapter2 = new CoverFlowAdapter2(getActivity());
         mCoverFlow2 = (FeatureCoverFlow) v.findViewById(R.id.coverflow);
         createDream =(FloatingActionButton)v.findViewById(R.id.fab);
 //        mTitle = (TextSwitcher) v.findViewById(R.id.title);
 
+        ActionBarActivity actionBarActivity = (ActionBarActivity) getActivity();
+        actionBarActivity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF9100")));
 
 
         final File cacheFile = new File(getActivity().getFilesDir(), "memories.json");
