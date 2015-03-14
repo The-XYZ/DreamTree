@@ -1,5 +1,7 @@
 package com.xyz.dreamtree;
 
+import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,10 +102,10 @@ public class DayFragment extends Fragment {
         ActionBarActivity activity = (ActionBarActivity) getActivity();
         activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#8BC34A")));
 
-        mData.add(new DreamEntity(R.drawable.image_1, R.string.title_activity_check));
-        mData.add(new DreamEntity(R.drawable.image_2, R.string.title_activity_check));
-        mData.add(new DreamEntity(R.drawable.image_3, R.string.title_activity_check));
-        mData.add(new DreamEntity(R.drawable.image_4, R.string.title_activity_check));
+//        mData.add(new DreamEntity(R.drawable.image_1, R.string.title_activity_check));
+//        mData.add(new DreamEntity(R.drawable.image_2, R.string.title_activity_check));
+//        mData.add(new DreamEntity(R.drawable.image_3, R.string.title_activity_check));
+//        mData.add(new DreamEntity(R.drawable.image_4, R.string.title_activity_check));
 
         mTitle = (TextSwitcher) v.findViewById(R.id.title);
         mTitle.setFactory(new ViewSwitcher.ViewFactory() {
@@ -122,26 +126,26 @@ public class DayFragment extends Fragment {
         mCoverFlow = (FeatureCoverFlow) v.findViewById(R.id.coverflow);
         mCoverFlow.setAdapter(mAdapter);
 
-        mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),
-                        getResources().getString(mData.get(position).titleResId),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
-            @Override
-            public void onScrolledToPosition(int position) {
-                mTitle.setText(getResources().getString(mData.get(position).titleResId));
-            }
-
-            @Override
-            public void onScrolling() {
-                mTitle.setText("");
-            }
-        });
+//        mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(getActivity(),
+//                        getResources().getString(mData.get(position).titleResId),
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
+//            @Override
+//            public void onScrolledToPosition(int position) {
+//                mTitle.setText(getResources().getString(mData.get(position).titleResId));
+//            }
+//
+//            @Override
+//            public void onScrolling() {
+//                mTitle.setText("");
+//            }
+//        });
 
 
 
@@ -211,4 +215,80 @@ public class DayFragment extends Fragment {
 
         }
     }
+
+
+
+
+
+    public class CoverFlowAdapter extends BaseAdapter {
+
+        private ArrayList<DreamEntity> mData = new ArrayList<>(0);
+        private Context mContext;
+
+        public CoverFlowAdapter(Context context) {
+            mContext = context;
+        }
+
+        public void setData(ArrayList<DreamEntity> data) {
+            mData = data;
+        }
+
+        @Override
+        public int getCount() {
+            return mData.size();
+        }
+
+        @Override
+        public Object getItem(int pos) {
+            return mData.get(pos);
+        }
+
+        @Override
+        public long getItemId(int pos) {
+            return pos;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            View rowView = convertView;
+
+            if (rowView == null) {
+                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowView = inflater.inflate(R.layout.item_coverflow, null);
+
+                ViewHolder viewHolder = new ViewHolder();
+                viewHolder.data = (TextView) rowView.findViewById(R.id.data);
+                viewHolder.image = (ImageView) rowView.findViewById(R.id.image);
+                viewHolder.date = (TextView) rowView.findViewById(R.id.date);
+                viewHolder.time = (TextView) rowView.findViewById(R.id.time);
+//                viewHolder.mood = (TextView) rowView.findViewById(R.id.mood);
+
+
+                rowView.setTag(viewHolder);
+            }
+
+            ViewHolder holder = (ViewHolder) rowView.getTag();
+
+            holder.image.setImageBitmap(BitmapFactory.decodeByteArray(mData.get(position).imageResId, 0, mData.get(position).imageResId.length));
+            holder.date.setText(mData.get(position).date);
+            holder.time.setText(mData.get(position).time);
+            holder.mood.setText(mData.get(position).mood);
+            holder.data.setText(mData.get(position).data);
+
+
+            return rowView;
+        }
+
+
+        public class ViewHolder {
+            public TextView date;
+            public ImageView image;
+            public TextView time;
+            public TextView mood ;
+            public TextView data;
+        }
+    }
+
+
 }
