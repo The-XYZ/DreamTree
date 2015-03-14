@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +31,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
@@ -109,7 +107,7 @@ public class DreamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View v = inflater.inflate(R.layout.fragment_dream, container, false);
+        final View v = inflater.inflate(R.layout.home_dreams, container, false);
 
         mAdapter = new CoverFlowAdapter(getActivity());
         mCoverFlow = (FeatureCoverFlow) v.findViewById(R.id.coverflow);
