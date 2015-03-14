@@ -1,29 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
 
-    <EditText
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/list_item_card_view"
+        style="@style/AnimationPopup"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        card_view:cardBackgroundColor="#aa212121"
+        card_view:cardCornerRadius="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:textColor="#212121"
+                android:background="@android:color/transparent"
+                android:hint="type your memory :)"
+                android:imeOptions="actionDone"
+                android:paddingLeft="16dp"
+                android:singleLine="true"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit"
-        />
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
 
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Save"
+            bootstrapbutton:bb_icon_right="fa-cloud"
+            bootstrapbutton:bb_roundedCorners="true"
+            bootstrapbutton:bb_type="primary" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/save"/>
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/takepic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Camera"
+            bootstrapbutton:bb_icon_right="fa-picture-o"
+            bootstrapbutton:bb_roundedCorners="true"
+            bootstrapbutton:bb_type="primary" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/camera"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/takepic"
-        android:text="camera"/>
+    </LinearLayout>
+
+    <!--<ImageView
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
 
 </LinearLayout>

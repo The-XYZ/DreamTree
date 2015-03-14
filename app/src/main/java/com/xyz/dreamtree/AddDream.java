@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,8 +29,8 @@ import java.util.Calendar;
  */
 public class AddDream extends ActionBarActivity {
 
-    private EditText edit;
-    private Button save,takePic;
+    private BootstrapEditText edit;
+    private BootstrapButton save,takePic;
     private String jsonSting;
     private ImageView camera;
     private static final int CAMERA_REQUEST = 1888;
@@ -60,11 +61,13 @@ public class AddDream extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.dream_add);
-        edit=(EditText) findViewById(R.id.edit);
-        save=(Button) findViewById(R.id.save);
-        takePic=(Button) findViewById(R.id.takepic);
+        setContentView(R.layout.home);
+        edit=(BootstrapEditText) findViewById(R.id.edit);
+        save=(BootstrapButton) findViewById(R.id.save);
+        takePic=(BootstrapButton) findViewById(R.id.takepic);
         camera=(ImageView) findViewById(R.id.camera);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override

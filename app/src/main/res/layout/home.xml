@@ -8,15 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.flaviofaria.kenburnsview.KenBurnsView
-            android:id="@+id/kenBurns"
+        <ImageView
+            android:id="@+id/camera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:scaleType="fitXY"
-            android:src="@drawable/sky" />
+            android:src="@drawable/blah" />
 
-        <include layout="@layout/fragment_dream"></include>
+        <include layout="@layout/dream_add"></include>
 
     </FrameLayout>
 </LinearLayout>
