@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +19,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
@@ -114,7 +116,8 @@ public class DreamFragment extends Fragment {
         createDream =(FloatingActionButton)v.findViewById(R.id.fab);
 //        mTitle = (TextSwitcher) v.findViewById(R.id.title);
 
-
+        ActionBarActivity actionBarActivity = (ActionBarActivity) getActivity();
+        actionBarActivity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#1976D2")));
 
         final File cacheFile = new File(getActivity().getFilesDir(), "dreams.json");
 
@@ -149,9 +152,10 @@ public class DreamFragment extends Fragment {
         mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),
-                       (mData.get(position).data),
-                        Toast.LENGTH_SHORT).show();
+
+                Intent intent =new Intent(getActivity(),DetailDream.class);
+                intent.putExtra("position",position);
+                startActivity(intent);
             }
         });
 

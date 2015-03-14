@@ -180,7 +180,7 @@ public class MainActivity extends ActionBarActivity {
                 fragment = new DayFragment();
                 break;
             case 2:
-
+                fragment = new MoodSelector();
                 break;
 
 
