@@ -19,7 +19,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
@@ -37,6 +36,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
+
 
 /**
  * Created by naman on 14/03/15.
@@ -155,9 +155,9 @@ public class DayFragment extends Fragment {
         mCoverFlow2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),
-                        (mData2.get(position).data),
-                        Toast.LENGTH_SHORT).show();
+                Intent intent =new Intent(getActivity(),DetailMemory.class);
+                intent.putExtra("position",position);
+                startActivity(intent);
             }
         });
 
