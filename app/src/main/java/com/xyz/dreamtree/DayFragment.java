@@ -10,13 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -114,13 +111,15 @@ public class DayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View v = inflater.inflate(R.layout.fragment_memories, container, false);
+        final View v = inflater.inflate(R.layout.home_memories, container, false);
 
         mAdapter2 = new CoverFlowAdapter2(getActivity());
         mCoverFlow2 = (FeatureCoverFlow) v.findViewById(R.id.coverflow);
         createDream =(FloatingActionButton)v.findViewById(R.id.fab);
 //        mTitle = (TextSwitcher) v.findViewById(R.id.title);
 
+        ActionBarActivity actionBarActivity = (ActionBarActivity) getActivity();
+        actionBarActivity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF9100")));
 
 
         final File cacheFile = new File(getActivity().getFilesDir(), "memories.json");

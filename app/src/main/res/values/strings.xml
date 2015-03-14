@@ -9,7 +9,7 @@
 
         <item >Dreams</item>
         <item >Memories</item>
-        <item >Dont Know</item>
+        <item >Moody baba</item>
 
 
 
@@ -25,5 +25,8 @@
 
     </array>
     <string name="title_activity_check">check</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
