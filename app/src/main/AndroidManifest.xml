@@ -51,6 +51,12 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppThemeNoToolbar" />
 
+
+            android:theme="@style/AppThemeNoToolbar"/>
+        <activity android:name=".MoodActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppThemeNoToolbar"/>
+>>>>>>> 0fdc1b361d520daacc179abe9b3251179babca07
     </application>
 
 </manifest>
